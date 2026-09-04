@@ -1,0 +1,169 @@
+
+contacts = []
+call_history = []
+
+def add_contact():
+    name = input("Enter name: ")
+    phone = input("Enter phone number: ")
+    email = input("Enter email: ")
+
+    contact = {
+        "name": name,
+        "phone": phone,
+        "email": email
+    }
+
+    contacts.append(contact)
+    print("Contact added successfully!")
+
+
+def view_contacts():
+    if len(contacts) == 0:
+        print("No contacts available.")
+    else:
+        print("\n--- CONTACT LIST ---")
+
+        for i, contact in enumerate(contacts, start=1):
+            print("Contact", i)
+            print("Name :", contact["name"])
+            print("Phone:", contact["phone"])
+            print("Email:", contact["email"])
+            print("-------------------")
+
+
+
+def search_contact():
+    name = input("Enter name to search: ")
+
+    found = False
+
+    for contact in contacts:
+        if contact["name"].lower() == name.lower():
+            print("\nContact Found!")
+            print("Name :", contact["name"])
+            print("Phone:", contact["phone"])
+            print("Email:", contact["email"])
+            found = True
+
+    if found == False:
+        print("Contact not found.")
+
+
+
+def update_contact():
+    name = input("Enter name of contact to update: ")
+
+    for contact in contacts:
+        if contact["name"].lower() == name.lower():
+
+            print("Enter new details:")
+
+            contact["name"] = input("Enter new name: ")
+            contact["phone"] = input("Enter new phone number: ")
+            contact["email"] = input("Enter new email: ")
+
+            print("Contact updated successfully!")
+            return
+
+    print("Contact not found.")
+
+
+
+def delete_contact():
+    name = input("Enter name of contact to delete: ")
+
+    for contact in contacts:
+        if contact["name"].lower() == name.lower():
+            contacts.remove(contact)
+            print("Contact deleted successfully!")
+            return
+
+    print("Contact not found.")
+
+
+
+def make_call():
+    phone = input("Enter phone number to call: ")
+
+    found = False
+
+    for contact in contacts:
+        if contact["phone"] == phone:
+
+            call = {
+                "name": contact["name"],
+                "phone": contact["phone"],
+                "status": "Outgoing Call"
+            }
+
+            call_history.append(call)
+
+            print("Calling", contact["name"], "...")
+            print("Call recorded successfully!")
+            found = True
+            break
+
+    if found == False:
+        print("Number not found in contacts.")
+
+
+
+def view_call_history():
+    if len(call_history) == 0:
+        print("No call history available.")
+    else:
+        print("\n--- CALL HISTORY ---")
+
+        for i, call in enumerate(call_history, start=1):
+            print("Call", i)
+            print("Name  :", call["name"])
+            print("Phone :", call["phone"])
+            print("Status:", call["status"])
+            print("--------------------")
+
+
+
+while True:
+
+    print("\n==============================")
+    print(" MOBILE CONTACT MANAGEMENT")
+    print("==============================")
+    print("1. Add Contact")
+    print("2. View Contacts")
+    print("3. Search Contact")
+    print("4. Update Contact")
+    print("5. Delete Contact")
+    print("6. Make Call")
+    print("7. View Call History")
+    print("8. Exit")
+    print("==============================")
+
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        add_contact()
+
+    elif choice == "2":
+        view_contacts()
+
+    elif choice == "3":
+        search_contact()
+
+    elif choice == "4":
+        update_contact()
+
+    elif choice == "5":
+        delete_contact()
+
+    elif choice == "6":
+        make_call()
+
+    elif choice == "7":
+        view_call_history()
+
+    elif choice == "8":
+        print("Thank you for using the system!")
+        break
+
+    else:
+        print("Invalid choice. Please try again.")
