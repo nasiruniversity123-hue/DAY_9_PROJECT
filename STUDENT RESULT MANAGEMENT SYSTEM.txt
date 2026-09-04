@@ -1,0 +1,96 @@
+
+def total_marks(py_mk, dbms_mk, math_mk, coa_mk):
+    total_marks = py_mk + dbms_mk + math_mk + coa_mk
+    return total_marks
+
+
+def total_persentage(a):
+    persentage = a / 4
+    return persentage
+
+
+def total_grade(c):
+    if c >= 90:
+        return "A+"
+    elif c >= 80:
+        return "A"
+    elif c >= 70:
+        return "B"
+    elif c >= 60:
+        return "C"
+    elif c >= 50:
+        return "D"
+    else:
+        return "F"
+
+
+results = {}
+
+print("\n==========================================")
+print("_____STUDENT RESULT MANAGEMENT SYSTEM_____")
+print("============================================")
+
+while True:
+    print("\n1. Calculate total marks and grade")
+    print("2. View results")
+    print("3. Exit")
+
+    choice = int(input("Enter choice: "))
+
+    if choice == 1:
+        st_name = input("Enter student name: ")
+        st_roll = int(input("Enter student roll no: "))
+
+        py_mk = int(input("Enter Python marks: "))
+        dbms_mk = int(input("Enter DBMS marks: "))
+        math_mk = int(input("Enter Math marks: "))
+        coa_mk = int(input("Enter COA marks: "))
+
+        a = total_marks(py_mk, dbms_mk, math_mk, coa_mk)
+        b = total_persentage(a)
+        c = total_grade(b)
+
+      
+        results[st_roll] = {
+            "Name": st_name,
+            "Roll":st_roll,
+            "Python": py_mk,
+            "DBMS": dbms_mk,
+            "Math": math_mk,
+            "COA": coa_mk,
+            "Total": a,
+            "Percentage": b,
+            "Grade": c
+        }
+
+        print("\nResult added successfully!")
+
+    elif choice == 2:
+        print("\n============================")
+        print("______STUDENT RESULTS_______")
+        print("============================")
+
+        if len(results) == 0:
+            print("No student result found!")
+
+        else:
+            for st_roll, details in results.items():
+                print("\n----------------------------")
+                print("Student Roll No :", st_roll)
+                print("Student Name    :", details["Name"])
+                print("Python Marks    :", details["Python"])
+                print("DBMS Marks      :", details["DBMS"])
+                print("Math Marks      :", details["Math"])
+                print("COA Marks       :", details["COA"])
+                print("Total Marks     :", details["Total"])
+                print("Percentage      :", details["Percentage"])
+                print("Grade           :", details["Grade"])
+                print("----------------------------")
+
+    elif choice == 3:
+        print("Program end!")
+        break
+
+    else:
+        print("Invalid choice!")
+
